@@ -1,0 +1,24 @@
+@use "./variables.scss" as *;
+@use "./mixins.scss" as *;
+
+$fz-10: 1rem;
+$fz-11: 1.1rem;
+$fz-12: 1.2rem;
+$fz-13: 1.3rem;
+$fz-14: 1.4rem;
+$fz-15: 1.5rem;
+$fz-16: 1.6rem;
+$fz-17: 1.7rem;
+$fz-18: 1.8rem;
+$fz-19: 1.9rem;
+$fz-20: 2rem;
+ 
+$primary-font:'Roboto Condensed', sans-serif;;
+
+$fw-thin:100;
+$fw-light:300;
+$fw-regular:400;
+$fw-medium:500;
+$fw-bold:700;
+$fw-exbold:800;
+$fw-black:900;

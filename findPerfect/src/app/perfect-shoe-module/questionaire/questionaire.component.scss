@@ -1,0 +1,55 @@
+@use "../../../assets/scss/index.scss" as *;
+:host {
+  height: 100%;
+  @extend %flex-f-column;
+}
+.questionaire-wrapper {
+  background-color: $secondary-bg-shade;
+  height: 100%;
+  .container {
+    height: 100%;
+    @extend %flex-f-column;
+  }
+  .qn-wrapper {
+    padding: 2rem 0;
+    height: 100%;
+    @extend %flex-f-column;
+    .text-promo {
+      font-size: $fz-12;
+      text-transform: uppercase;
+      letter-spacing: 0.4rem;
+      text-align: center;
+      color: $white-text;
+      font-weight: $fw-light;
+      .caption {
+        + .caption {
+          margin-top: 0.5rem;
+        }
+      }
+    }
+    .question-main {
+      height: 100%;
+      @extend %flex-column;
+      @extend %flex-align-items-center;
+      padding-top: 19rem; 
+      .question-prompt {
+        font-size: $fz-20;
+        color: $white-text;
+        line-height: 1.5;
+        margin-bottom: 7rem;
+        text-align: center;
+      }
+      .question-options {
+        @extend %flex;
+        @include column-gap(2rem);
+        width: 100%;
+        .btn {
+          width: 100%;
+          background-color: transparent;
+          border: 1px solid $white-bg;
+          color: $white-text;
+        }
+      }
+    }
+  }
+}

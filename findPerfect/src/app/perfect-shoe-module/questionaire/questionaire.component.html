@@ -1,0 +1,18 @@
+<div *ngIf="!loadingData" class="questionaire-wrapper">
+  <div class="container">
+    <div class="qn-wrapper">
+      <div class="text-promo">
+        <p class="caption">try on quiz</p>
+        <p class="caption">30 Days risk free</p>
+      </div>
+      <div class="question-main">
+        <div class="question-prompt">{{currentQuestion?.copy}}</div>
+        <div class="question-options">
+          <button *ngFor="let answer of currentQuestion?.answers" (click)="processSelection(answer)"
+            class="btn btn-primary" aria-label="option">{{answer.copy}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-loader-screen *ngIf="loadingData"></app-loader-screen>
