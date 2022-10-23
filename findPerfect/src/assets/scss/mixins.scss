@@ -1,0 +1,47 @@
+//MIXINS AND EXTENDS
+
+%flex {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  %flex-column {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+  
+  %flex-f-column {
+    @extend %flex;
+    @extend %flex-column;
+  }
+  %align-items-center {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+  %flex-align-items-center {
+    @extend %flex;
+    @extend %align-items-center;
+  }
+  %justify-content-center {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+  %flex-justify-content-center {
+    @extend %flex;
+    @extend %justify-content-center;
+  }
+  %flex-all-center {
+    @extend %flex;
+    @extend %justify-content-center;
+    @extend %align-items-center;
+  }
+  
+  @mixin column-gap($value){
+    -webkit-column-gap:$value;
+    -moz-column-gap:$value;
+    column-gap: $value;
+  }

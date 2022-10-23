@@ -1,0 +1,80 @@
+@use "../../../assets/scss/index.scss" as *;
+.header-component {
+  &__wrapper {
+    @extend %flex-align-items-center;
+    padding: 1rem 0;
+    min-height: 3.3rem;
+  }
+}
+.hamburger-section {
+  .menu {
+    .btn-hamburger {
+      @extend %flex-f-column;
+      padding: 0;
+      &.active {
+        span {
+          &:nth-child(1) {
+            transform: rotate(45deg) translate(0.4rem, 0.3rem);
+          }
+          &:nth-child(2) {
+            opacity: 0;
+          }
+          &:nth-child(3) {
+            transform: rotate(-45deg) translate(0.2rem, -0.21rem);
+          }
+        }
+        ~ .navigation {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+      span {
+        height: 0.1rem;
+        width: 1.3rem;
+        display: block;
+        background-color: $secondary-text-shade;
+        transition: 0.3s all;
+        + span {
+          margin-top: 0.3rem;
+        }
+      }
+    }
+    .navigation {
+      transform: translateX(-100%);
+      position: fixed;
+      top: 5rem;
+      left: 0;
+      height: calc(100% - 5rem);
+      width: 100%;
+      transition: all 0.3s ease;
+      background: $black-bg;
+      z-index: 1;
+      opacity: 0;
+      ul {
+        padding: 4rem 2rem;
+        @extend %flex-f-column;
+        overflow: auto;
+        height: 100%;
+        li {
+          a {
+            text-decoration: none;
+            font-size: $fz-16;
+            color: $white-text;
+          }
+          + li {
+            margin-top: 3rem;
+          }
+        }
+      }
+    }
+  }
+}
+.company-logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 1.3rem;
+  img {
+    width: 2.2rem;
+  }
+}

@@ -1,0 +1,93 @@
+@use "../../../assets/scss/index.scss" as *;
+:host {
+  height: 100%;
+  @extend %flex-f-column;
+}
+.listing-wrapper {
+  background-color: $white-bg;
+  height: 100%;
+  border-top: 1px solid $border-shade-3;
+  .container {
+    height: 100%;
+    @extend %flex-f-column;
+  }
+  .listing-list-wrapper {
+    padding: 2rem 0;
+    height: 100%;
+    @extend %flex-f-column;
+    .listing-main {
+      @extend %flex-column;
+      padding: 2rem 0;
+      .status-wrapper {
+        margin-bottom: 4rem;
+      }
+      .listing-status {
+        font-size: $fz-18;
+        line-height: 1.4;
+        margin-bottom: 1rem;
+        font-weight: $fw-medium;
+        color: $black-text;
+        &--text {
+          font-size: $fz-14;
+          line-height: 1.4;
+          color: $text-shade-1;
+          max-width: 26rem;
+        }
+      }
+      .result-wrapper {
+        + .result-wrapper {
+          margin-top: 4rem;
+        }
+        .result-card {
+          @extend %flex-f-column;
+          .btn-secondary {
+            max-width: 17rem;
+            margin: 2rem auto 0;
+            width: 100%;
+          }
+          .result-details {
+            @extend %flex-f-column;
+            background-color: $runner-grey-shade-100;
+            padding: 2rem 1rem;
+            border-radius: 0.4rem;
+            .pdt-img {
+              width: 100%;
+              margin-bottom: 2rem;
+              display: block;
+              max-width: 80%;
+              margin: 0 auto 2rem;
+            }
+            .product {
+              &-title {
+                font-size: $fz-16;
+                font-weight: $fw-regular;
+                margin-bottom: 1rem;
+              }
+              &-description {
+                font-size: $fz-14;
+                font-weight: $fw-light;
+                color: $text-shade-1;
+                line-height: 1.5;
+              }
+            }
+          }
+          + .result-card {
+            margin-top: 4rem;
+          }
+        }
+      }
+      .btn-restart {
+        margin: 4rem auto 0;
+        display: block;
+        font-size: $fz-14;
+        border: 1px solid $border-shade-3; 
+        min-width: 17rem;
+      }
+    }
+  }
+}
+.similar-title{
+    font-size: $fz-18;
+    font-weight: $fw-medium;
+    margin: 2rem 0;
+}

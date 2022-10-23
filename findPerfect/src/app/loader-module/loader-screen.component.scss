@@ -1,0 +1,35 @@
+@use "../../assets/scss/index.scss" as *;
+:host {
+  height: 100%;
+  @extend %flex-f-column;
+}
+.loading-wrapper {
+  background-color: $secondary-bg-shade;
+  height: 100%;
+  .container {
+    height: 100%;
+    @extend %flex-f-column;
+  }
+  .loading-list-wrapper {
+    padding: 2rem 0;
+    height: 100%;
+    @extend %flex-f-column;
+    .loading-main {
+      height: 100%;
+      @extend %flex-column;
+      @extend %flex-align-items-center;
+      padding-top: 19rem; 
+      .loading-prompt{
+        img{
+            width: 100%;
+            max-width: 5rem;
+        }
+      }
+      .loading-status{
+        font-size: $fz-18;
+        color: $text-shade-1;
+        margin-top: 1.5rem;
+      }
+    }
+  }
+}
