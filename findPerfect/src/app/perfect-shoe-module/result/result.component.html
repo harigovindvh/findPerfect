@@ -12,14 +12,14 @@
         <div class="result-wrapper">
           <div *ngFor="let shoe of perfectMatchList;  trackBy:trackByShoeId" class="result-card">
             <div class="result-details">
-              <img [src]="getImagePath(shoe.name)" alt="Cloud X" class="pdt-img" />
+              <img src="../../../assets/images/{{shoe.name}}.png" alt="Cloud X" class="pdt-img" />
               <p class="product-title">{{shoe.name}}</p>
               <p class="product-description">
                 Your perfect partner in the world's lightest fully-cushioned
                 shoe for Running Remixed.
               </p>
             </div>
-            <button class="btn btn-secondary" aria-label="shop your new pair of cloud X">
+            <button type="button" class="btn btn-secondary" aria-label="shop your new pair of cloud X">
               Shop Now
             </button>
           </div>
@@ -27,21 +27,21 @@
         <!-- Similar Suggested -->
         <div class="result-wrapper">
           <h4 class="similar-title">Similar Products</h4>
-          <div *ngFor="let shoe of shoesList ; trackBy:trackByShoeId" class="result-card">
+          <div *ngFor="let shoe of similarList; trackBy:trackByShoeId" class="result-card">
             <div class="result-details">
-              <img [src]="getImagePath(shoe.name)" alt="Cloud X" class="pdt-img" />
+              <img src="../../../assets/images/{{shoe.name}}.png" alt="Cloud X" class="pdt-img" />
               <p class="product-title">{{shoe.name}}</p>
               <p class="product-description">
                 Your perfect partner in the world's lightest fully-cushioned
                 shoe for Running Remixed.
               </p>
             </div>
-            <button class="btn btn-secondary" aria-label="shop your new pair of cloud X">
+            <button type="button" class="btn btn-secondary" aria-label="shop your new pair of cloud X">
               Shop Now
             </button>
           </div>
         </div>
-        <button [routerLink]="['/perfectshoe/questionaire']" aria-label="Restart your quiz"
+        <button [routerLink]="['/perfectshoe/questionaire']" type="button" aria-label="Restart your quiz"
           class="btn btn-plain btn-restart">
           Restart quiz
         </button>

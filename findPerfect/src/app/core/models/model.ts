@@ -1,5 +1,5 @@
 
-interface IshoeType {
+interface IShoeType {
     id: string; 
     name: string; 
     rating: number;
@@ -30,8 +30,8 @@ interface IRatingType {
 };
 
 export {
-    IshoeType,
+    IShoeType,
     IQuestionType,
-    IAnswerType as IanswerType,
-    IRatingType as IratingType
+    IAnswerType,
+    IRatingType
   }

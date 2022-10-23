@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { IanswerType, IQuestionType, IratingType } from 'src/app/core/models/model';
-import { DataTransferServiceService } from 'src/app/core/services/data-transfer-service.service';
+import { IAnswerType, IQuestionType, IRatingType } from 'src/app/core/models/model';
+import { SavedDataService } from 'src/app/core/services/data-transfer-service.service';
 import { QuestionaireService } from './questionaire.service';
 
 
@@ -11,12 +11,14 @@ import { QuestionaireService } from './questionaire.service';
   templateUrl: './questionaire.component.html',
   styleUrls: ['./questionaire.component.scss']
 })
-export class QuestionaireComponent implements OnInit {
+export class QuestionaireComponent {
   //initial question id 0
-  questionId: number = 0;
+  initialQuestionId: number = 0;
+
   currentQuestion: IQuestionType | undefined;
   loadingData: boolean = true;
-  currentRating: IratingType = {
+  //initializing current rating to zero
+  currentRating: IRatingType = {
     cloud: 0,
     cloudx: 0,
     cloudflow: 0,
@@ -29,13 +31,10 @@ export class QuestionaireComponent implements OnInit {
 
   constructor(
     private _questionaireService: QuestionaireService,
-    private _dataTransferServiceService: DataTransferServiceService,
+    private _savedDataService: SavedDataService,
     private router: Router
   ) {
-    this.getNextQuestion(0);
-   }
-
-  ngOnInit(): void {
+    this.getNextQuestion(this.initialQuestionId);
   }
 
   /**
@@ -49,13 +48,13 @@ export class QuestionaireComponent implements OnInit {
 
   /**
    * Selection update process
-   * @param answer 
+   * @param answer Selected answer
    */
-  processSelection(answer : IanswerType) {
+  processSelection(answer: IAnswerType) {
     this.loadingData = true;
     this.updateRating(answer.ratingIncrease);
-    if(typeof(answer.nextQuestion) !== 'number') {
-      this._dataTransferServiceService.setData(this.currentRating);
+    if (typeof (answer.nextQuestion) !== 'number') {
+      this._savedDataService.saveRating(this.currentRating);
       this.router.navigate(['perfectshoe/result']);
       return;
     }
@@ -66,10 +65,10 @@ export class QuestionaireComponent implements OnInit {
    * Evaluate overall rating based on user selection
    * @param rating latest rating
    */
-  updateRating(rating: IratingType) {
+  updateRating(rating: IRatingType) {
     const keys = Object.keys(rating);
     keys.forEach(key => {
-        this.currentRating[key] = rating[key] + this.currentRating[key]
+      this.currentRating[key] = rating[key] + this.currentRating[key]
     });
   }
 

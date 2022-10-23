@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { IshoeType } from 'src/app/core/models/model';
-import { DataTransferServiceService } from 'src/app/core/services/data-transfer-service.service';
+import { IRatingType, IShoeType } from 'src/app/core/models/model';
+import { SavedDataService } from 'src/app/core/services/data-transfer-service.service';
 import { ResultService } from './result.service';
 
 
@@ -11,21 +11,27 @@ import { ResultService } from './result.service';
   styleUrls: ['./result.component.scss']
 })
 export class ResultComponent implements OnInit {
-  finalRatings: any;
-  shoesList: IshoeType[] = [];
-  perfectMatchList: any = [];
+  finalRatings: IRatingType | null;
+  shoesList: IShoeType[] = [];
+  perfectMatchList: IShoeType[] = [];
+  similarList: IShoeType[] = [];
   perfectMatch: string = '';
   loadingData: boolean = true;
   constructor(
     private _resultService: ResultService,
-    private _dataTransferServiceService: DataTransferServiceService,
+    private _savedDataService: SavedDataService,
     private router: Router
   ) {
-    this.finalRatings = this._dataTransferServiceService.getData();
-    this.finalRatings? this.getShoesList() : this.router.navigate(['home']);
+    this.finalRatings = this._savedDataService.fetchRating();
+    this.finalRatings ? this.getShoesList() : this.router.navigate(['home']);
   }
 
+  /**
+   * lifecycle hook
+   */
   ngOnInit(): void {
+    //loader screen simulation since no api's being called
+    setTimeout(() => this.loadingData = false, 1000);
   }
 
   /**
@@ -40,19 +46,21 @@ export class ResultComponent implements OnInit {
    * Evaluate result based on user preference
    */
   valuateResult() {
+    this.shoesList.forEach(x => {
+      x.rating = this.finalRatings ? this.finalRatings[x.id] : null;
+    });
+    this.shoesList.sort((a, b) => {
+      return a.rating + b.rating;
+    });
+    let topRating = this.shoesList[0].rating;
     this.shoesList.forEach(shoe => {
-      shoe.rating = this.finalRatings[shoe.id];
+      if (shoe.rating === topRating) {
+        this.perfectMatchList.push(shoe);
+      } else {
+        this.similarList.push(shoe);
+      }
     });
-    this.shoesList.sort((shoeA, shoeB) => {
-      return shoeA.rating + shoeB.rating;
-    });
-    this.perfectMatchList.push(this.shoesList.shift());
-    //Updating perfect match if multiple shoes gets identical rating
-    while(this.shoesList && this.perfectMatchList[0].rating === this.shoesList[0].rating) {
-      this.perfectMatchList.push(this.shoesList.shift());
-    }
     this.perfectMatch = this.addCommasAndAnd(this.perfectMatchList);
-    this.loadingData = false;
   }
 
   /**
@@ -60,21 +68,18 @@ export class ResultComponent implements OnInit {
    * @param list list of items with names of the shoes
    * @returns comma/and seperated string
    */
-  addCommasAndAnd(list: IshoeType[]) {
+  addCommasAndAnd(list: IShoeType[]) {
     if (list.length < 3) { return list.map((x: { name: any; }) => x.name).join(' & '); }
     return `${list.slice(0, - 1).map((x: { name: any; }) => x.name).join(', ')}, & ${list[list.length - 1].name}`;
   };
 
   /**
-   * 
-   * @param name name of the shoe
-   * @returns path for the image
+   * Track changes of foreach loop in html //part of Angular performance optimization
+   * @param index 
+   * @param shoe 
+   * @returns 
    */
-  getImagePath(name: string) {
-    return `../../../assets/images/${name}.png`
-  }
-
-  trackByShoeId(index: number, shoe: any) {
+  trackByShoeId(index: number, shoe: IShoeType) {
     return shoe.id;
   }
 }

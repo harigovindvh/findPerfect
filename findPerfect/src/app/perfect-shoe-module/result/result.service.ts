@@ -7,11 +7,11 @@ import { DatasetService } from 'src/app/core/services/dataset.service';
 export class ResultService {
 
   constructor(
-    private dataBase: DatasetService
+    private _datasetService: DatasetService
   ) { }
 
   getShoesList() {
-    const shoesList = this.dataBase.dataset.shoes;
+    const shoesList = this._datasetService.dataset.shoes;
     return shoesList;
   }
 }

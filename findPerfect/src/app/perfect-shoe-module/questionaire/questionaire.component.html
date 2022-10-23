@@ -8,7 +8,7 @@
       <div class="question-main">
         <div class="question-prompt">{{currentQuestion?.copy}}</div>
         <div class="question-options">
-          <button *ngFor="let answer of currentQuestion?.answers" (click)="processSelection(answer)"
+          <button *ngFor="let answer of currentQuestion?.answers" type="button" (click)="processSelection(answer)"
             class="btn btn-primary" aria-label="option">{{answer.copy}}</button>
         </div>
       </div>
